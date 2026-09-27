@@ -1,0 +1,108 @@
+/* =========================================================
+   AURA STUDIO — SHARED LAYOUT (both pages)
+   Navigation, mobile menu, section basics, footer.
+   Written mobile-first: base styles are for phones; min-width
+   media queries add tablet (700px) and desktop (980px).
+   ========================================================= */
+
+:lang(si),.si{line-height:1.75}
+
+/* Shared bits */
+.btn-ink-line{border-color:rgba(238,240,246,.4);color:var(--on-ink)}
+.btn-ink-line:hover{border-color:var(--on-ink)}
+.btn-mist{background:var(--on-ink);color:var(--ink)}
+.btn-mist:hover{background:#fff}
+.btn-block{width:100%}
+.btn .i-wa svg,.btn .i-fb svg{width:18px;height:18px}
+[class^="i-"]{display:inline-flex}
+[class^="i-"] svg{width:1em;height:1em}
+.text-link{display:inline-flex;align-items:center;min-height:44px;gap:8px;font-weight:700;font-size:15px;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.muted{color:var(--text-2)}
+.lede{max-width:38em;color:var(--text-2);margin:0 0 28px}
+.sh{display:flex;align-items:center;gap:14px;font-family:var(--f-display);font-weight:500;font-size:clamp(1.75rem,1.3rem + 1.6vw,2.5rem);line-height:1.12;letter-spacing:-.015em;margin:0 0 14px}
+.sec{padding:72px 0}
+.sec-mist{background:var(--panel)}
+.sec-ink{background:var(--ink);color:var(--on-ink)}
+.sec-ink .lede{color:var(--on-ink-2)}
+@media (min-width:980px){.sec{padding:112px 0}}
+.hide-sm{display:none}
+@media (min-width:700px){.hide-sm{display:inline-flex}}
+
+/* Gentle reveal as sections reach the screen (only when JS is running) */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .js .rv.seen{opacity:1;transform:none}
+}
+
+/* ---------- 1. Navigation ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:55;padding-top:env(safe-area-inset-top,0px);color:var(--on-ink);transition:background-color .25s,border-color .25s,color .25s;border-bottom:1px solid transparent}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px}
+.nav-logo{display:flex;align-items:center;min-height:44px;flex:none}
+.nav-logo img{height:32px;width:auto}
+.nav-logo .on-light{display:none}
+.nav-links{display:none;list-style:none;margin:0;padding:0;gap:30px;font-size:15px;font-weight:500}
+.nav-links a{text-decoration:none;color:inherit;opacity:.8}
+.nav-links a:hover{opacity:1}
+.nav-cta{display:none;border-color:currentColor;color:inherit;padding:12px 18px;font-size:14px}
+.menu-btn{width:44px;height:44px;border-radius:10px;border:1.5px solid currentColor;background:none;color:inherit;display:grid;place-items:center;cursor:pointer;opacity:.9}
+.menu-btn svg{width:20px;height:20px}
+.menu-btn path{transition:transform .25s var(--ease),opacity .2s;transform-origin:12px 12px}
+.menu-open .menu-btn .l1{transform:translateY(5px) rotate(45deg)}
+.menu-open .menu-btn .l2{opacity:0}
+.menu-open .menu-btn .l3{transform:translateY(-5px) rotate(-45deg)}
+.nav.scrolled{background:var(--page);color:var(--text);border-bottom-color:var(--rule)}
+.nav.scrolled .on-dark{display:none}
+.nav.scrolled .on-light{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nav.scrolled .on-dark{display:block}:root:not([data-theme="light"]) .nav.scrolled .on-light{display:none}}
+:root[data-theme="dark"] .nav.scrolled .on-dark{display:block}
+:root[data-theme="dark"] .nav.scrolled .on-light{display:none}
+.menu-open .nav{background:transparent;color:var(--on-ink);border-bottom-color:transparent}
+.menu-open .nav .on-dark{display:block}.menu-open .nav .on-light{display:none}
+@media (min-width:980px){.nav-links,.nav-cta{display:flex}.menu-btn{display:none}.nav-row{height:76px}}
+
+.menu{position:fixed;inset:0;z-index:50;background:var(--ink);color:var(--on-ink);padding-top:calc(88px + env(safe-area-inset-top,0px));padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+.menu[hidden]{display:none}
+.menu .wrap>a{display:block;padding:14px 0;border-bottom:1px solid rgba(238,240,246,.12);font-family:var(--f-display);font-size:28px;font-weight:500;text-decoration:none}
+.menu-actions{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:no-preference){.menu:not([hidden]){animation:menuIn .25s ease both}}
+@keyframes menuIn{from{opacity:0}to{opacity:1}}
+@media (min-width:980px){.menu{display:none!important}}
+
+/* ---------- 13. Footer ---------- */
+.footer{background:var(--ink);color:var(--on-ink);padding:64px 0 calc(40px + env(safe-area-inset-bottom,0px))}
+.f-top{display:grid;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(238,240,246,.14)}
+.f-brand img{width:108px;height:auto}
+.f-brand p{margin:14px 0 0;color:var(--on-ink-2)}
+.f-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}
+.f-cols h3{font-family:var(--f-display);font-weight:500;font-size:16px;margin:0 0 10px}
+.f-cols ul{list-style:none;margin:0;padding:0}
+.f-cols a{display:inline-flex;align-items:center;min-height:44px;padding:0;text-decoration:none;color:var(--on-ink-2);font-size:15px}
+.f-cols a:hover{color:var(--on-ink)}
+.f-bottom{padding-top:28px;display:flex;flex-direction:column;gap:6px}
+.f-bottom p{margin:0;color:var(--on-ink-2);font-size:14px}
+.f-bottom .sign{font-family:var(--f-display);font-size:20px;color:var(--on-ink)}
+@media (min-width:980px){.f-top{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}.f-cols{grid-template-columns:repeat(3,minmax(0,1fr))}.f-bottom{flex-direction:row;justify-content:space-between;align-items:baseline}}
+
+/* Floating WhatsApp hides near the contact form and footer, so it never covers them */
+.wa-fab{transition:opacity .25s,transform .25s}
+.wa-fab.away{opacity:0;transform:translateY(12px);pointer-events:none}
+.wa-fab .i-wa svg{width:28px;height:28px}
+
+/* Skip link for keyboard users */
+.skip{position:absolute;left:12px;top:-60px;z-index:80;background:var(--uv);color:#fff;padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+
+/* Pages without a dark hero keep the solid navigation */
+.nav-solid{background:var(--page);color:var(--text);border-bottom-color:var(--rule)}
+.nav-solid .on-dark{display:none}.nav-solid .on-light{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nav-solid .on-dark{display:block}:root:not([data-theme="light"]) .nav-solid .on-light{display:none}}
+:root[data-theme="dark"] .nav-solid .on-dark{display:block}
+:root[data-theme="dark"] .nav-solid .on-light{display:none}
+
+/* Anchor links land below the fixed navigation, with smooth scrolling */
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (min-width:980px){html{scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+/* Focus rings stay visible on dark sections */
+.nav:not(.scrolled):not(.nav-solid) :focus-visible,.hero :focus-visible,.sec-ink :focus-visible,.cta :focus-visible,.footer :focus-visible,.menu :focus-visible,.lb :focus-visible{outline-color:var(--on-ink)}
